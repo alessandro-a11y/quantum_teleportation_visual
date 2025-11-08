@@ -6,9 +6,6 @@ import plotly.graph_objects as go
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ==========================
-# CONFIGURAÇÃO INICIAL
-# ==========================
 st.set_page_config(page_title="Quantum Teleportation Simulator ⚛️", page_icon="⚛️", layout="wide")
 
 st.title("⚛️ Quantum Teleportation Visual Simulator")
@@ -18,9 +15,6 @@ Simule o protocolo de **teleportação quântica** com visualizações 3D e hist
 """)
 
 
-# ==========================
-# FUNÇÃO: DESENHAR ESFERA DE BLOCH
-# ==========================
 def plot_bloch_vector(statevector, title=""):
     a, b = statevector[0], statevector[1]
     theta = 2 * np.arccos(np.abs(a))
@@ -57,9 +51,7 @@ def plot_bloch_vector(statevector, title=""):
     return fig
 
 
-# ==========================
-# ESTADO INICIAL
-# ==========================
+
 st.sidebar.header("Estado inicial |ψ⟩")
 alpha = st.sidebar.slider("Amplitude α (|0⟩)", 0.0, 1.0, 0.8)
 phase = st.sidebar.slider("Fase de β (em radianos)", 0.0, 6.28, 0.0)
@@ -67,9 +59,6 @@ beta = np.sqrt(1 - alpha**2) * np.exp(1j * phase)
 
 st.sidebar.write(f"Estado inicial: |ψ⟩ = {alpha:.2f}|0⟩ + {beta:.2f}|1⟩")
 
-# ==========================
-# CIRCUITO DE TELEPORTAÇÃO
-# ==========================
 qc = QuantumCircuit(3, 2)
 
 # Define o estado inicial no qubit 0
@@ -92,12 +81,6 @@ st.subheader("🧩 Circuito de Teleportação Quântica")
 st.text(qc.draw(output="text"))
 
 
-# ==========================
-# SIMULAÇÃO QUÂNTICA
-# ==========================
-# ==========================
-# SIMULAÇÃO QUÂNTICA
-# ==========================
 sim = AerSimulator()
 compiled_circuit = transpile(qc, sim)
 job = sim.run(compiled_circuit, shots=1024)
@@ -113,9 +96,7 @@ sim_state = AerSimulator(method="statevector")
 job_state = sim_state.run(qc_final)
 final_state = job_state.result().data(0)["statevector"]
 
-# ==========================
-# VISUALIZAÇÕES
-# ==========================
+
 col1, col2 = st.columns(2)
 with col1:
     st.plotly_chart(plot_bloch_vector([alpha, beta], "Estado Original (Qubit 0)"))
@@ -126,9 +107,7 @@ with col2:
 st.subheader("📊 Resultados da Medição")
 st.pyplot(plot_histogram(counts))
 
-# ==========================
-# EXPLICAÇÃO
-# ==========================
+
 st.markdown("---")
 st.markdown("### 🧠 Explicação resumida")
 st.write("""
