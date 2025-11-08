@@ -1,0 +1,5 @@
+streamlit==1.39.0
+qiskit==0.45.0
+plotly==5.23.0
+matplotlib==3.8.0
+numpy==1.26.0
