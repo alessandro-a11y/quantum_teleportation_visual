@@ -89,7 +89,7 @@ qc.measure([0, 1], [0, 1])
 # Correções condicionais (simuladas conceitualmente)
 # (no Qiskit moderno, c_if mudou e não afeta visual)
 st.subheader("🧩 Circuito de Teleportação Quântica")
-st.pyplot(circuit_drawer(qc, output="mpl"))
+st.text(qc.draw(output="text"))
 
 
 # ==========================
